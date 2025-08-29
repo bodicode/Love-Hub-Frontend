@@ -1,6 +1,22 @@
 {
-  "rewrites": [
-    { "source": "/memories/:match*", "destination": "/memories-app/:match*" },
-    { "source": "/:match*", "destination": "/main-app/:match*" }
+  "builds": [
+    {
+      "src": "main-app/next.config.js",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "memories-app/next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/memories/(.*)",
+      "dest": "memories-app/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "main-app/$1"
+    }
   ]
 }
