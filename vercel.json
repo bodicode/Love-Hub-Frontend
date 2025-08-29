@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/memories/:match*", "destination": "/memories-app/:match*" },
+    { "source": "/:match*", "destination": "/main-app/:match*" }
+  ]
+}

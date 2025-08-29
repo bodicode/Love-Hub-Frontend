@@ -1,0 +1,19 @@
+{
+  "name": "lovehub",
+  "private": true,
+  "workspaces": [
+    "main-app",
+    "memories-app"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w main-app",
+    "dev:main": "npm run dev -w main-app",
+    "dev:memories": "npm run dev -w memories-app",
+    "dev:all": "concurrently \"npm run dev -w main-app\" \"npm run dev -w memories-app\"",
+    "build": "npm run build -w main-app && npm run build -w memories-app",
+    "lint": "npm run lint -w main-app && npm run lint -w memories-app"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
