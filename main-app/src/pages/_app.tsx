@@ -1,10 +1,18 @@
+// src/pages/_app.tsx
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import "../styles/globals.css";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+});
 
 type ClientOnlyQueryClientProviderProps = {
   children: React.ReactNode;
-  client: QueryClient;
+  client: any;
 };
 
 const ClientOnlyQueryClientProvider = dynamic(
@@ -17,7 +25,7 @@ const ClientOnlyQueryClientProvider = dynamic(
   { ssr: false }
 );
 
-let queryClient: QueryClient;
+let queryClient: any;
 
 if (typeof window !== "undefined") {
   queryClient = new QueryClient();
@@ -28,7 +36,10 @@ if (typeof window !== "undefined") {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ClientOnlyQueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      {/* 👇 Áp dụng className cho toàn bộ app */}
+      <main className={`${montserrat.variable}`}>
+        <Component {...pageProps} />
+      </main>
     </ClientOnlyQueryClientProvider>
   );
 }
