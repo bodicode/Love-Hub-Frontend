@@ -6,14 +6,27 @@
     "memories-app"
   ],
   "scripts": {
-    "dev": "npm run dev -w main-app",
-    "dev:main": "npm run dev -w main-app",
-    "dev:memories": "npm run dev -w memories-app",
-    "dev:all": "concurrently \"npm run dev -w main-app\" \"npm run dev -w memories-app\"",
-    "build": "npm run build -w main-app && npm run build -w memories-app",
-    "lint": "npm run lint -w main-app && npm run lint -w memories-app"
+    "dev:main": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w main-app",
+    "dev:memories": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w memories-app",
+    "dev:all": "concurrently \"cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w main-app\" \"cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w memories-app\"",
+    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run build -w main-app && cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run build -w memories-app",
+    "start:main": "npm run start -w main-app -- -p 4000",
+    "start:memories": "npm run start -w memories-app -- -p 3001",
+    "start:all": "concurrently \"npm run start:main\" \"npm run start:memories\""
+  },
+  "dependencies": {
+    "next": "15.5.2",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "@module-federation/nextjs-mf": "^8.8.38"
   },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.0",
+    "cross-env": "^7.0.3",
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "webpack": "^5.101.3"
   }
 }

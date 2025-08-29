@@ -1,9 +1,12 @@
 import { NextFederationPlugin } from "@module-federation/nextjs-mf";
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  outputFileTracingRoot: path.join(__dirname, "../.."),
   webpack(config, options) {
+    process.env.NEXT_PRIVATE_LOCAL_WEBPACK = "true";
     config.plugins.push(
       new NextFederationPlugin({
         name: "memories-app",

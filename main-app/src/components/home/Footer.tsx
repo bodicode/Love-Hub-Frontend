@@ -1,8 +1,11 @@
 "use client";
 import { FaFacebookF, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { FC } from "react";
 
 const Footer = () => {
+  const socials = [FaFacebookF, FaTwitter, FaInstagram, FaGithub];
+
   return (
     <motion.footer
       className="bg-gray-900 text-gray-300 py-12 mt-16"
@@ -25,17 +28,22 @@ const Footer = () => {
             💖
           </p>
           <div className="flex space-x-4 text-lg">
-            {[FaFacebookF, FaTwitter, FaInstagram, FaGithub].map((Icon, i) => (
-              <motion.a
-                key={i}
-                href="#"
-                className="hover:text-pink-500"
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <Icon />
-              </motion.a>
-            ))}
+            {socials.map((Icon, i) => {
+              const SafeIcon: FC<{ className?: string }> = Icon as FC<{
+                className?: string;
+              }>;
+              return (
+                <motion.a
+                  key={i}
+                  href="#"
+                  className="hover:text-pink-500"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <SafeIcon />
+                </motion.a>
+              );
+            })}
           </div>
         </motion.div>
 

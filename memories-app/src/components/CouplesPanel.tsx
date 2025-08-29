@@ -1,15 +1,14 @@
 "use client";
+
 import * as React from "react";
 import {
   useQuery,
   useMutation,
   useQueryClient,
-  QueryClient,
-  QueryClientProvider,
 } from "@tanstack/react-query";
 import { api } from "@/lib/fetcher";
 
-function Inner() {
+export default function CouplesPanel() {
   const qc = useQueryClient();
   const me = useQuery({
     queryKey: ["me"],
@@ -95,16 +94,5 @@ function Inner() {
         </ul>
       </div>
     </div>
-  );
-}
-
-// Nếu host đã bọc React Query thì không cần Provider ở đây.
-// Nhưng để an toàn khi render độc lập, bọc nhẹ:
-export default function CouplesPanel() {
-  const [qc] = React.useState(() => new QueryClient());
-  return (
-    <QueryClientProvider client={qc}>
-      <Inner />
-    </QueryClientProvider>
   );
 }
