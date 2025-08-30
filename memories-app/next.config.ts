@@ -5,18 +5,15 @@ import path from "path";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: path.join(__dirname, "../.."),
-  webpack(config, options) {
+  webpack(config) {
     process.env.NEXT_PRIVATE_LOCAL_WEBPACK = "true";
     config.plugins.push(
       new NextFederationPlugin({
         name: "memories-app",
         filename: "static/chunks/remoteEntry.js",
-        remotes: {
-          main: `main-app@http://localhost:3000/_next/static/${
-            options.isServer ? "ssr" : "chunks"
-          }/remoteEntry.js`,
+        exposes: {
+          "./CouplesPanel": "./src/components/CouplesPanel.tsx",
         },
-        exposes: { "./CouplesPanel": "./src/components/CouplesPanel.tsx" },
         shared: {
           react: { singleton: true, requiredVersion: false, eager: true },
           "react-dom": { singleton: true, requiredVersion: false, eager: true },

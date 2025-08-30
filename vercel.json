@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "main-app/next.config.js", "use": "@vercel/next" },
+    { "src": "memories-app/next.config.js", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "^/memories(?:/(.*))?$", "dest": "memories-app/$1" },
+    { "src": "^(?!/memories)(.*)$", "dest": "main-app/$1" }
+  ]
+}
