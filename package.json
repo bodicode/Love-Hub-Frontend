@@ -9,7 +9,7 @@
     "dev:main": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w main-app",
     "dev:memories": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w memories-app",
     "dev:all": "concurrently \"cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w main-app\" \"cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run dev -w memories-app\"",
-    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run build -w main-app && cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true npm run build -w memories-app",
+    "build": "npm run build -w main-app && npm run build -w memories-app",
     "start:main": "npm run start -w main-app -- -p 4000",
     "start:memories": "npm run start -w memories-app -- -p 3001",
     "start:all": "concurrently \"npm run start:main\" \"npm run start:memories\""
